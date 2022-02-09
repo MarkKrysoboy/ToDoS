@@ -1,40 +1,27 @@
 package ru.netology.javacore;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Todos {
 
-    private String task;
-    private String type;
+    private Task task;
     List setTasks = new ArrayList();
 
-    public String getTask() {
-        return task;
-    }
-
-    public void setTask(String task) {
-        this.task = task;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void addTask(String task) {
+    public void addTask(Task task) {
         setTasks.add(task);
     }
 
-    public void removeTask(String task) {
+    public void removeTask(Task task) {
         setTasks.remove(task);
     }
 
     public String getAllTasks() {
-        Optional<String> reduced = setTasks.stream().sorted(Comparator.naturalOrder()).reduce((combinedValue, value) -> combinedValue + " " + value);
-        return reduced.get();
+        return setTasks.stream()
+                .map(String::valueOf)
+                .sorted(Comparator.naturalOrder())
+                .collect(Collectors.joining(" "))
+                .toString();
     }
 }
 

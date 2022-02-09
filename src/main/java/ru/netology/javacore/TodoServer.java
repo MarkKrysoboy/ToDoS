@@ -8,8 +8,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class TodoServer {
-    Todos todos;
-    int port;
+    private Todos todos;
+    private int port;
 
     public TodoServer(int port, Todos todos) {
         this.todos = todos;
@@ -28,17 +28,17 @@ public class TodoServer {
 
                 GsonBuilder builder = new GsonBuilder();
                 Gson gson = builder.create();
+                Task task = gson.fromJson(name, Task.class);
 
-                String type = gson.fromJson(name, Todos.class).getType();
-                String task = gson.fromJson(name, Todos.class).getTask();
-
-                if (type.equals("ADD")) {
-                    todos.addTask(task);
-                } else if (type.equals("REMOVE")) {
-                    todos.removeTask(task);
+                switch (task.getType()) {
+                    case ("ADD"):
+                        todos.addTask(task);
+                        break;
+                    case ("REMOVE"):
+                        todos.removeTask(task);
+                        break;
                 }
                 out.println(todos.getAllTasks());
-
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -22,9 +22,9 @@ public class TodosTests {
     @Test
     public void testAddTasksCount() {
         //arrange
-        todos.addTask("Первая");
-        todos.addTask("Вторая");
-        todos.addTask("Третья");
+        todos.addTask(new Task("Первая"));
+        todos.addTask(new Task("Вторая"));
+        todos.addTask(new Task("Третья"));
         long expected = 3;
         //act
         long result = todos.setTasks.size();
@@ -35,11 +35,11 @@ public class TodosTests {
     @Test
     public void testAddTasksGoal() {
         //arrange
-        todos.addTask("Прогулка");
-        todos.addTask("Бег");
-        todos.addTask("Секция");
+        todos.addTask(new Task("Прогулка"));
+        todos.addTask(new Task("Бег"));
+        todos.addTask(new Task("Секция"));
         //act
-        Boolean result = todos.setTasks.contains("Бег");
+        Boolean result = todos.setTasks.contains(new Task("Бег"));
         //assert
         Assertions.assertEquals(true, result);
     }
@@ -47,10 +47,10 @@ public class TodosTests {
     @Test
     public void testRemoveTasksCount() {
         //arrange
-        todos.addTask("Прогулка");
-        todos.addTask("Бег");
-        todos.addTask("Секция");
-        todos.removeTask("Бег");
+        todos.addTask(new Task("Прогулка"));
+        todos.addTask(new Task("Бег"));
+        todos.addTask(new Task("Секция"));
+        todos.removeTask(new Task("Бег"));
         long expected = 2;
         //act
         long result = todos.setTasks.size();
@@ -61,12 +61,12 @@ public class TodosTests {
     @Test
     public void testRemoveTasksGoal() {
         //arrange
-        todos.addTask("Прогулка");
-        todos.addTask("Бег");
-        todos.addTask("Секция");
-        todos.removeTask("Бег");
+        todos.addTask(new Task("Прогулка"));
+        todos.addTask(new Task("Бег"));
+        todos.addTask(new Task("Секция"));
+        todos.removeTask(new Task("Бег"));
         //act
-        Boolean result = todos.setTasks.contains("Бег");
+        Boolean result = todos.setTasks.contains(new Task("Бег"));
         //assert
         Assertions.assertEquals(false, result);
     }
@@ -74,9 +74,9 @@ public class TodosTests {
     @Test
     public void testGetAllTasks() {
         //arrange
-        todos.addTask("Прогулка");
-        todos.addTask("Секция");
-        todos.addTask("Бег");
+        todos.addTask(new Task("Прогулка"));
+        todos.addTask(new Task("Секция"));
+        todos.addTask(new Task("Бег"));
         String expected = "Бег Прогулка Секция";
         //act
         String result = todos.getAllTasks();
